@@ -265,6 +265,16 @@ impl Ast {
     }
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+enum ParseError {
+    UnexpectedToken(Token),
+    NotExpression(Token),
+    NotOperator(Token),
+    UnclosedOpenParen(Token),
+    RedundantExpression(Token),
+    Eof,
+}
+
 fn prompt(s: &str) -> io::Result<()> {
     use std::io::{stdout, Write};
     let stdout = stdout();
